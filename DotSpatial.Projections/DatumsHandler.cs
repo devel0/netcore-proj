@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Xml.Serialization;
 
 namespace DotSpatial.Projections
@@ -19,9 +20,12 @@ namespace DotSpatial.Projections
             {
                 fileName = Path.Combine(Path.GetDirectoryName(currentAssemblyLocation), "datums.xml");
             }
+            var resourceName = "DotSpatial.Projections.XML.datums.xml.ds";
+            if (RuntimeInformation.FrameworkDescription != ".NET Framework")
+                resourceName = "DotSpatial.Projections.datums.xml.ds";
             using (var datumStream = File.Exists(fileName)
                 ? File.OpenRead(fileName)
-                : DeflateStreamReader.DecodeEmbeddedResource("DotSpatial.Projections.datums.xml.ds"))
+                : DeflateStreamReader.DecodeEmbeddedResource(resourceName))
             {
 
                 var xmlSerializer = new XmlSerializer(typeof(DatumEntries));
