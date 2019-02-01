@@ -100,7 +100,10 @@ namespace DotSpatial.Projections.AuthorityCodes
 
         private void ReadDefault()
         {
-            using (var str = DeflateStreamReader.DecodeEmbeddedResource("DotSpatial.Projections.AuthorityCodes.epsg.ds"))
+            var resourceName = "netcore-proj.AuthorityCodes.epsg.ds";
+            if (!RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework"))
+                resourceName = "netcore-proj.epsg.ds";
+            using (var str = DeflateStreamReader.DecodeEmbeddedResource(resourceName))
             {
                 ReadFromStream(str, "EPSG");
             }
