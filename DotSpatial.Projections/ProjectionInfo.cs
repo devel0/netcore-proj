@@ -24,6 +24,7 @@ using System.Text;
 using System.Threading;
 using DotSpatial.Projections.AuthorityCodes;
 using DotSpatial.Projections.Transforms;
+using netcore_proj;
 
 namespace DotSpatial.Projections
 {

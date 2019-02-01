@@ -16,6 +16,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using DotSpatial.Projections.Nad;
+using netcore_proj;
 
 namespace DotSpatial.Projections
 {

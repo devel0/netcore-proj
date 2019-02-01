@@ -17,6 +17,7 @@ using System;
 using System.Diagnostics;
 using DotSpatial.Projections.Nad;
 using DotSpatial.Projections.Transforms;
+using netcore_proj;
 
 namespace DotSpatial.Projections
 {
