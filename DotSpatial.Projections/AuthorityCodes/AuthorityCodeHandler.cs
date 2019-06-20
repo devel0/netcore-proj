@@ -12,6 +12,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Runtime.InteropServices;
+using System.Linq;
 
 namespace DotSpatial.Projections.AuthorityCodes
 {
@@ -67,6 +69,14 @@ namespace DotSpatial.Projections.AuthorityCodes
 
         #region Public methods
 
+        public IEnumerable<ProjectionInfo> AllProjectionInfo
+        {
+            get
+            {
+                return _authorityCodeToProjectionInfo.Select(dk => dk.Value);
+            }
+        }
+
         /// <summary>
         /// Adds the specified authority.
         /// </summary>
@@ -100,7 +110,8 @@ namespace DotSpatial.Projections.AuthorityCodes
 
         private void ReadDefault()
         {
-            using (var str = DeflateStreamReader.DecodeEmbeddedResource("DotSpatial.Projections.AuthorityCodes.epsg.ds"))
+            var resourceName = "netcore-proj.AuthorityCodes.epsg.ds";            
+            using (var str = DeflateStreamReader.DecodeEmbeddedResource(resourceName))
             {
                 ReadFromStream(str, "EPSG");
             }
@@ -136,15 +147,15 @@ namespace DotSpatial.Projections.AuthorityCodes
             {
                 throw new ArgumentOutOfRangeException("authorityCode", "Such projection already added.");
             }
-            ProjectionInfo pi;
+            ProjectionInfo pi;          
             try
-            {
-                pi = ProjectionInfo.FromProj4String(proj4String);
-            }
-            catch (ProjectionException)
             {
                 // todo: geocent not supported yet by DS
                 if (proj4String.Contains("+proj=geocent")) return;
+                pi = ProjectionInfo.FromProj4String(proj4String);
+            }
+            catch (ProjectionException)
+            {                
                 throw;
             }
             

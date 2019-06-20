@@ -14,6 +14,7 @@
 // ********************************************************************************************************
 
 using System;
+using netcore_proj;
 
 namespace DotSpatial.Projections
 {

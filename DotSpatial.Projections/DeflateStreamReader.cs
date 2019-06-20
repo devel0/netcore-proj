@@ -1,6 +1,8 @@
 using System.IO;
 using System.IO.Compression;
 using System.Reflection;
+using System.Linq;
+using System;
 
 namespace DotSpatial.Projections
 {
@@ -13,7 +15,11 @@ namespace DotSpatial.Projections
         /// <returns>Stream</returns>
         public static Stream DecodeEmbeddedResource(string resourceName)
         {
-            using (var s = Assembly.GetCallingAssembly().GetManifestResourceStream(resourceName))
+            var assembly = Assembly.GetCallingAssembly();
+            var availableResourceNames = assembly.GetManifestResourceNames().ToList();
+            if (!availableResourceNames.Contains(resourceName))
+                throw new Exception($"resource [{resourceName}] unavailable between [{string.Join(", ", availableResourceNames)}]");
+            using (var s = assembly.GetManifestResourceStream(resourceName))
             {
                 var msUncompressed = new MemoryStream();
                 using (var ds = new DeflateStream(s, CompressionMode.Decompress, true))

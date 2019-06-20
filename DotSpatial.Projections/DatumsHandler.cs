@@ -20,9 +20,7 @@ namespace DotSpatial.Projections
             {
                 fileName = Path.Combine(Path.GetDirectoryName(currentAssemblyLocation), "datums.xml");
             }
-            var resourceName = "netcore-proj.XML.datums.xml.ds";
-            if (!RuntimeInformation.FrameworkDescription.StartsWith(".NET Framework"))
-                resourceName = "netcore-proj.datums.xml.ds";
+            var resourceName = "netcore-proj.XML.datums.xml.ds";            
             using (var datumStream = File.Exists(fileName)
                 ? File.OpenRead(fileName)
                 : DeflateStreamReader.DecodeEmbeddedResource(resourceName))
