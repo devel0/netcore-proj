@@ -3,11 +3,11 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <PackageId>netcore-proj</PackageId>
-        <PackageVersion>1.0.0</PackageVersion>
-        <Title>net core proj</Title>
-        <Description>net core package for dotspatial projections ( https://github.com/DotSpatial/DotSpatial )</Description>
-        <Authors>Lorenzo Delana</Authors>
-        <PackageTags>netcore projection coorindates wgs84 epsg</PackageTags>
+        <PackageVersion>1.0.1</PackageVersion>
+        <Title>wgs, epsg projections</Title>
+        <Description>NET core porting of Dotspatial projections ( https://github.com/DotSpatial/DotSpatial )</Description>
+        <Authors>[dotspatial](https://www.nuget.org/profiles/dotspatial)</Authors>
+        <PackageTags>netcore projection coordinates wgs84 epsg</PackageTags>
         <PackageProjectUrl>https://github.com/devel0/netcore-proj</PackageProjectUrl>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
